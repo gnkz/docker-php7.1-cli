@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 USERNAME=gnkz
-REPONAME=php7.1-cli-dev
+REPONAME=php7.1-cli-alpine
 BRANCHNAME=$(git symbolic-ref -q HEAD)
 BRANCHNAME=${BRANCHNAME##refs/heads/}
 BRANCHNAME=${BRANCHNAME:-INTAG}
