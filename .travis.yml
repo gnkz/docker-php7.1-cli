@@ -1,0 +1,26 @@
+sudo: required
+services:
+- docker
+branches:
+  except:
+  - develop
+  - "/^feature\\/.*$/"
+  - "/^release\\/.*$/"
+  - "/^support\\/.*$/"
+  - "/^hotfix\\/.*$/"
+env:
+  global:
+  - COMMIT: "${TRAVIS_COMMIT::8}"
+  - DOCKER_REPO: gnkz/php7.1-cli-alpine
+  - CGO_ENABLED: 0
+  - GOOS: linux
+  - GOARCH: amd64
+  - secure: FxSFpRcoppWdrIlrHosSqcHe5EWSrE5F00gvkE+R3wLZt4UnPXY7sG3gkURa9mAav8+j25fzycn9JeWwaXxgHJXrySumjPRIl8QwPGPU8g400f3ge3eHtGVLvDW1APQPdlJTMiAozSywVERIrpEPVRrl8Zbl2kyHcXtPhwcObrYs7XdSeWQT/sXEjvkY6KUMKPtj5OWAkl4QjK6R49S2y48MkijFn+rGz96A24m4DahgdQbFnwhq+FPasmfJZVW5PNxMGqKS6Y8wvJDO4sRlb8gVpjgf/0ynUtFBFm7jDM3lCDcYmS6yr6dRJep2l1NjB0E+kO6v74TKrvTU/ReBJZZ7887bRxYOg/+R/nioBQJSYXHpTKX9v/iwRzz2uNq/3K+ZsyTxl7UjXP6y83Rwrvah99BP5okwfESvrcjVmIX895hWkhpj0dVfg/rM9c91l1DjSiJrD2OC9D/al/jzorq4dxlwP3kAqj61rDMM7taHWfC6ro5Hi2uk0BCczZG7SHyKPy9FShFTe6MC2mX8btIp+EcBB+vUrZnGXU3zuMmfIgKuE1JE4Ye7W33enyigLy9JYoq864Bhyr9Wfi0htnJVRNxxWa+YcgEiGZGBB2po9WuUAO5xtYtyxUMFQzMyIj1KdSl5W3RDMuzp0RL4CKV0vLbsOWaQgs4eHWKT2Is=
+script:
+- export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH;
+  fi`
+- docker build -t $DOCKER_REPO:$COMMIT -f Dockerfile .
+after_success:
+- docker login -u gnkz -p $DOCKER_PASS
+- docker tag $DOCKER_REPO:$COMMIT $DOCKER_REPO:$TAG
+- docker push $DOCKER_REPO
