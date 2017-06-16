@@ -1,4 +1,4 @@
-FROM gnkz/base-dev:0.1.0
+FROM gnkz/base-dev:0.1.1
 MAINTAINER gnkz.dev@gmail.com
 
 ENV PHP_VERSION 7.1.6-r0
