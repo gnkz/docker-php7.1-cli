@@ -1,7 +1,7 @@
 FROM gnkz/base-dev:0.1.1
 MAINTAINER gnkz.dev@gmail.com
 
-ENV PHP_VERSION 7.1.6-r0
+ENV PHP_VERSION 7.1.9-r1
 ENV PHP_REDIS_VERSION 3.1.2-r1
 
 RUN apk --no-cache add php7=$PHP_VERSION \
@@ -27,7 +27,8 @@ RUN apk --no-cache add php7=$PHP_VERSION \
         php7-ctype=$PHP_VERSION \
         php7-dom=$PHP_VERSION \
         php7-simplexml=$PHP_VERSION \
-        php7-phar=$PHP_VERSION && \
+        php7-phar=$PHP_VERSION \
+        php7-curl=$PHP_VERSION && \
         sed -i "s/^memory_limit = 128M/memory_limit = -1/g" /etc/php7/php.ini && \
         sed -i "s/^;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g" /etc/php7/php.ini
 
