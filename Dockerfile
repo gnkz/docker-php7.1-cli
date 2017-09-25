@@ -24,6 +24,7 @@ RUN apk --no-cache add php7=$PHP_VERSION \
         php7-mysqli=$PHP_VERSION \
         php7-xmlwriter=$PHP_VERSION \
         php7-zlib=$PHP_VERSION \
+        php7-bcmath=$PHP_VERSION \
         php7-ctype=$PHP_VERSION \
         php7-dom=$PHP_VERSION \
         php7-simplexml=$PHP_VERSION \
