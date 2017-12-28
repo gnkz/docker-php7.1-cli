@@ -21,6 +21,6 @@ script:
   fi`
 - docker build -t $DOCKER_REPO:$COMMIT -f Dockerfile .
 after_success:
-- docker login -u gnkz -p $DOCKER_PASS
+- docker login -u gnkz -p $DOCKER_PASS >/dev/null 2>&1
 - docker tag $DOCKER_REPO:$COMMIT $DOCKER_REPO:$TAG
 - docker push $DOCKER_REPO
